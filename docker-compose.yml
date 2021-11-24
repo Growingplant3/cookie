@@ -8,6 +8,12 @@ services:
     volumes:
       - ./application:/var/www
     tty: true
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_DATABASE=cookie
+      - DB_USERNAME=phpuser
+      - DB_PASSWORD=secret
 
   web:
     container_name: nginx
@@ -26,6 +32,11 @@ services:
       - 3307:3306
     volumes:
       - db-store:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=cookie
+      - MYSQL_USER=phpuser
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=default
 
   redis:
     container_name: redis
